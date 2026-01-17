@@ -82,13 +82,30 @@
         .hero {
             position: relative;
             height: 600px;
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-                url('https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=1600') center/cover;
+            background: linear-gradient(135deg, #d4541e 0%, #b8421a 50%, #8b3214 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
 
         .hero-content h1 {
@@ -329,17 +346,61 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
+            .recipe-grid {
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
             .hero-content h1 {
-                font-size: 3rem;
+                font-size: 4rem;
             }
 
             .recipe-grid {
                 grid-template-columns: 1fr;
+                gap: 40px;
             }
 
-            .about-container {
-                grid-template-columns: 1fr;
+            .container {
+                margin: 60px auto;
+                padding: 0 30px;
+            }
+
+            .recipe-content {
+                padding: 30px;
+            }
+
+            .recipe-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .lang-btn {
+                padding: 6px 15px;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                height: 500px;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .hero-btn {
+                padding: 12px 28px;
+                font-size: 1rem;
             }
 
             .nav-container {
@@ -347,7 +408,102 @@
             }
 
             .container {
+                margin: 40px auto;
                 padding: 0 20px;
+            }
+
+            .recipe-grid {
+                gap: 30px;
+                margin-top: 40px;
+            }
+
+            .recipe-content {
+                padding: 25px;
+            }
+
+            .recipe-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .time-info {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .time-item {
+                flex: 1 1 40%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 400px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+
+            .hero-btn {
+                padding: 10px 24px;
+                font-size: 0.95rem;
+            }
+
+            .scroll-indicator {
+                font-size: 0.85rem;
+            }
+
+            .recipe-image {
+                height: 250px;
+            }
+
+            .recipe-content {
+                padding: 20px;
+            }
+
+            .recipe-title {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .time-info {
+                gap: 15px;
+            }
+
+            .time-item {
+                flex: 1 1 100%;
+            }
+
+            .time-label {
+                font-size: 0.8rem;
+            }
+
+            .ingredients-list li {
+                font-size: 0.95rem;
+                padding: 10px 0 10px 25px;
+            }
+
+            .steps-list li {
+                font-size: 0.95rem;
+                padding: 12px 0 12px 45px;
+            }
+
+            .steps-list li::before {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -472,7 +628,7 @@
             <!-- Lasagna Recipe -->
             <div class="recipe-card">
                 <div style="position: relative;">
-                    <img src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=800" alt="Lasagna"
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23d4541e;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%238b3214;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='600' fill='url(%23grad)'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial, sans-serif' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle' opacity='0.7'%3ELasagna%3C/text%3E%3C/svg%3E" alt="Lasagna"
                         class="recipe-image">
                     <div class="recipe-badge">Classic</div>
                 </div>
@@ -571,9 +727,9 @@
 
     <!-- Footer -->
     <footer>
-        <p class="lang-content active" data-lang="ko">© 2025 Italian Recipes. 모든 권리 보유.</p>
-        <p class="lang-content" data-lang="en">© 2025 Italian Recipes. All rights reserved.</p>
-        <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.7;">Est. 2020</p>
+        <p class="lang-content active" data-lang="ko">교육 목적으로 제작된 샘플 웹사이트입니다.</p>
+        <p class="lang-content" data-lang="en">Sample website created for educational purposes.</p>
+        <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.7;">2025 Recipe Collection</p>
     </footer>
 
     <script>
