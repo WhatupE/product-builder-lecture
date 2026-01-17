@@ -224,12 +224,66 @@
             padding: 40px;
         }
 
+        .recipe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .recipe-header:hover {
+            border-bottom-color: #d4541e;
+        }
+
         .recipe-title {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             font-weight: 700;
             color: #2c2c2c;
-            margin-bottom: 20px;
+            margin: 0;
+        }
+
+        .accordion-toggle {
+            background: none;
+            border: 2px solid #d4541e;
+            color: #d4541e;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .accordion-toggle:hover {
+            background: #d4541e;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .accordion-toggle.active {
+            background: #d4541e;
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        .recipe-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .recipe-details.open {
+            max-height: 5000px;
+            transition: max-height 0.8s ease-in;
         }
 
         .time-info {
@@ -553,9 +607,13 @@
                     <div class="recipe-badge">Popular</div>
                 </div>
                 <div class="recipe-content">
-                    <h2 class="recipe-title">Aglio e Olio</h2>
+                    <div class="recipe-header" onclick="toggleAccordion(this)">
+                        <h2 class="recipe-title">Aglio e Olio</h2>
+                        <button class="accordion-toggle">▼</button>
+                    </div>
 
-                    <div class="time-info">
+                    <div class="recipe-details">
+                        <div class="time-info">
                         <div class="time-item">
                             <span class="time-label lang-content active" data-lang="ko">준비</span>
                             <span class="time-label lang-content" data-lang="en">Prep</span>
@@ -623,6 +681,7 @@
                             <li>Top with parmesan cheese if desired and serve immediately.</li>
                         </ol>
                     </div>
+                    </div>
                 </div>
             </div>
 
@@ -633,9 +692,13 @@
                     <div class="recipe-badge">Classic</div>
                 </div>
                 <div class="recipe-content">
-                    <h2 class="recipe-title">Lasagna</h2>
+                    <div class="recipe-header" onclick="toggleAccordion(this)">
+                        <h2 class="recipe-title">Lasagna</h2>
+                        <button class="accordion-toggle">▼</button>
+                    </div>
 
-                    <div class="time-info">
+                    <div class="recipe-details">
+                        <div class="time-info">
                         <div class="time-item">
                             <span class="time-label lang-content active" data-lang="ko">준비</span>
                             <span class="time-label lang-content" data-lang="en">Prep</span>
@@ -720,6 +783,7 @@
                             <li>Let cool for 10 minutes before serving.</li>
                         </ol>
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -752,6 +816,15 @@
 
             // Update HTML lang attribute
             document.documentElement.lang = lang;
+        }
+
+        function toggleAccordion(header) {
+            const details = header.nextElementSibling;
+            const toggle = header.querySelector('.accordion-toggle');
+
+            // Toggle open class
+            details.classList.toggle('open');
+            toggle.classList.toggle('active');
         }
     </script>
 </body>
